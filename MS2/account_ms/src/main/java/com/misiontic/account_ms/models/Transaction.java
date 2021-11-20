@@ -11,6 +11,7 @@ public class Transaction {
     private String id;
     private String usernameOrigin;
     private String usernameDestiny;
+    private Integer value;
     private Date date;
 
     // Constructor
@@ -51,4 +52,11 @@ public class Transaction {
         this.date = date;
     }
 
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
 }

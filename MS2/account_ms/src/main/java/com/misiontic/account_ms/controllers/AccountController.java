@@ -1,5 +1,6 @@
 package com.misiontic.account_ms.controllers;
 
+import com.misiontic.account_ms.exceptions.AccountNotFoundException;
 import com.misiontic.account_ms.models.Account;
 import com.misiontic.account_ms.repositories.AccountRepository;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,9 @@ public class AccountController {
      */
 
     @GetMapping("/accounts/{username}")
-    public Optional<Account> getAccount(@PathVariable String username){
-        return this.repository.findById(username);
+    public Account getAccount(@PathVariable String username){
+        return this.repository.findById(username)
+                .orElseThrow(() -> new AccountNotFoundException("La cuenta no existe"));
     }
 
     /*
@@ -43,6 +45,7 @@ public class AccountController {
 
     @PostMapping("/accounts")
     public Account newAccount(@RequestBody Account account){
+
         return this.repository.save(account);
     }
 
